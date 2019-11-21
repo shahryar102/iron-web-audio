@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import AudioAnalyser from "./AudioAnalyser";
 import axios from "axios";
 import { restElement } from "@babel/types";
-
+import { Switch, Link, Route } from "react-router-dom";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -36,11 +36,9 @@ class App extends Component {
 
   sendDataHandler = data => {};
 
-  postApi = x => {
+  postApi = (x) => {
     console.log("this is posting function");
-    axios
-      .post("https://ironrest.herokuapp.com/shahriyar", x)
-      .then(data => {});
+    axios.post("https://ironrest.herokuapp.com/shahriyar", x).then(data => {});
   };
   clearApi = () => {
     console.log("this is the clear function");
