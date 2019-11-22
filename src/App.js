@@ -6,6 +6,8 @@ import { Switch, Link, Route } from "react-router-dom";
 import Camera from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 import Recorder from "react-mp3-recorder";
+//import './App.css';
+import './buttons.css'
 class App extends Component {
   constructor(props) {
     super(props);
@@ -99,7 +101,7 @@ cameraOn=()=>{
         <main>
           <div className="controls">
             <button onClick={this.toggleMicrophone}>
-              {this.state.audio ? "Stop microphone" : "Get microphone input"}
+              {this.state.audio ? "Stop microphone" : "Turn on Graphic Microphone"}
             </button>
           </div>
           {this.state.audio && (
@@ -108,24 +110,23 @@ cameraOn=()=>{
               send={this.sendDataHandler}
             />
           )}
-          <button onClick={this.clearApi} style={{ padding: "5px" }}>
-            Clear Niko's API
+          <button className='buttons' onClick={this.clearApi} >
+            Clear iron-rest API
           </button>
-          <br></br>
-          <br></br>
+        
 
           <div id="photo-from-container">
-            <button onClick={() => widget.open()}>Upload File to Cloudinary</button>
+            <button className='buttons' onClick={() => widget.open()}>Upload File to Cloudinary</button>
           </div>
-          <br></br>
+          
           {/* <Recorder
         onRecordingComplete={this._onRecordingComplete}
         onRecordingError={this._onRecordingError}
       /> */}
-      <br></br>
+      
 
           
-            <button onClick = {this.cameraOn} >Turn on Camera</button>
+            <button className='buttons' onClick = {this.cameraOn} >Turn on React Camera</button>
             
           {this.state.camera ? <Camera
   onTakePhoto={dataUri => {

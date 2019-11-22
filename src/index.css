@@ -32,6 +32,7 @@ main canvas {
   display: block;
 }
 footer {
+  height: 10px;
   background: #333e5a;
   color: #fff;
   text-align: center;
