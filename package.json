@@ -5,7 +5,10 @@
   "dependencies": {
     "axios": "^0.19.0",
     "react": "^16.12.0",
+    "react-audio-recorder": "^2.2.0",
     "react-dom": "^16.12.0",
+    "react-html5-camera-photo": "^1.5.2",
+    "react-mp3-recorder": "^1.1.2",
     "react-scripts": "3.2.0"
   },
   "scripts": {

@@ -3,13 +3,29 @@ import AudioAnalyser from "./AudioAnalyser";
 import axios from "axios";
 import { restElement } from "@babel/types";
 import { Switch, Link, Route } from "react-router-dom";
+import Camera from "react-html5-camera-photo";
+import "react-html5-camera-photo/build/css/index.css";
+import Recorder from "react-mp3-recorder";
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       audio: null,
-      selectedFile: null
+      selectedFile: null,
+      camera:false
     };
+  }
+
+  componentDidMount(){
+    axios.get('https://ironrest.herokuapp.com/shahriyar').then(data=>{
+      //set to state and loop through to show images 
+      console.log(data)
+    })
+  }
+
+  onTakePhoto(dataUri) {
+    // Do stuff with the dataUri photo...
+    console.log("takePhoto");
   }
 
   async getMicrophone() {
@@ -36,9 +52,9 @@ class App extends Component {
 
   sendDataHandler = data => {};
 
-  postApi = (x) => {
+  postApi = x => {
     console.log("this is posting function");
-    axios.post("https://ironrest.herokuapp.com/shahriyar", x).then(data => {});
+    axios.post("https://ironrest.herokuapp.com/shahriyar", {url:x}).then(data => {});
   };
   clearApi = () => {
     console.log("this is the clear function");
@@ -56,6 +72,7 @@ class App extends Component {
   checkUploadResult = resultEvent => {
     if (resultEvent.event === "success") {
       console.log(resultEvent, resultEvent.info.url);
+        
       this.postApi(resultEvent.info.url);
     }
   };
@@ -63,6 +80,9 @@ class App extends Component {
   showWidget = widget => {
     widget.open();
   };
+cameraOn=()=>{
+  this.setState({camera:true})
+}
 
   render() {
     let widget = window.cloudinary.createUploadWidget(
@@ -93,14 +113,25 @@ class App extends Component {
           </button>
           <br></br>
           <br></br>
-          {/* <div>
-            <input type="file" onChange={this.fileSelectHandler} /> <br></br>
-            <button onClick={this.fileUploadHandler}>Upload</button>
-          </div> */}
 
           <div id="photo-from-container">
-            <button onClick={() => widget.open()}>Upload Photo</button>
+            <button onClick={() => widget.open()}>Upload File to Cloudinary</button>
           </div>
+          <br></br>
+          {/* <Recorder
+        onRecordingComplete={this._onRecordingComplete}
+        onRecordingError={this._onRecordingError}
+      /> */}
+      <br></br>
+
+          
+            <button onClick = {this.cameraOn} >Turn on Camera</button>
+            
+          {this.state.camera ? <Camera
+  onTakePhoto={dataUri => {
+    this.onTakePhoto(dataUri);
+  }} 
+/> : '' }
         </main>
       </div>
     );
