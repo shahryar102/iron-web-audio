@@ -7,23 +7,42 @@ import Camera from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 import Recorder from "react-mp3-recorder";
 //import './App.css';
-import './buttons.css'
+import "./buttons.css";
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       audio: null,
       selectedFile: null,
-      camera:false
+      camera: false,
+      gallery: {}
     };
   }
 
-  componentDidMount(){
-    axios.get('https://ironrest.herokuapp.com/shahriyar').then(data=>{
-      //set to state and loop through to show images 
-      console.log(data)
-    })
+  componentDidMount() {
+    axios.get("https://ironrest.herokuapp.com/shahriyar").then(data => {
+      //set to state and loop through to show images
+      console.log(data);
+    });
   }
+  showGallery = () => {
+    return this.state.gallery.map((eachItem, i) => {
+      if (eachItem.url) {
+        return (
+          <li key={i}>
+            <h2>{eachItem._id}</h2>
+            <img src={eachItem.url} width="100px" />
+            //<button onClick={() => this.delete(i)}>Delete</button>
+          </li>
+        );
+      }
+    });
+  };
+  delete = index => {
+    let newGallery = [...this.state.gallery];
+    newGallery.splice(index, 1);
+    this.setState({ gallery:newGallery });
+  };
 
   onTakePhoto(dataUri) {
     // Do stuff with the dataUri photo...
@@ -56,7 +75,9 @@ class App extends Component {
 
   postApi = x => {
     console.log("this is posting function");
-    axios.post("https://ironrest.herokuapp.com/shahriyar", {url:x}).then(data => {});
+    axios
+      .post("https://ironrest.herokuapp.com/shahriyar", { url: x })
+      .then(data => {});
   };
   clearApi = () => {
     console.log("this is the clear function");
@@ -74,7 +95,7 @@ class App extends Component {
   checkUploadResult = resultEvent => {
     if (resultEvent.event === "success") {
       console.log(resultEvent, resultEvent.info.url);
-        
+
       this.postApi(resultEvent.info.url);
     }
   };
@@ -82,9 +103,9 @@ class App extends Component {
   showWidget = widget => {
     widget.open();
   };
-cameraOn=()=>{
-  this.setState({camera:true})
-}
+  cameraOn = () => {
+    this.setState({ camera: true });
+  };
 
   render() {
     let widget = window.cloudinary.createUploadWidget(
@@ -101,7 +122,9 @@ cameraOn=()=>{
         <main>
           <div className="controls">
             <button onClick={this.toggleMicrophone}>
-              {this.state.audio ? "Stop microphone" : "Turn on Graphic Microphone"}
+              {this.state.audio
+                ? "Stop microphone"
+                : "Turn on Graphic Microphone"}
             </button>
           </div>
           {this.state.audio && (
@@ -110,29 +133,34 @@ cameraOn=()=>{
               send={this.sendDataHandler}
             />
           )}
-          <button className='buttons' onClick={this.clearApi} >
+          <button className="buttons" onClick={this.clearApi}>
             Clear iron-rest API
           </button>
-        
 
           <div id="photo-from-container">
-            <button className='buttons' onClick={() => widget.open()}>Upload File to Cloudinary</button>
+            <button className="buttons" onClick={() => widget.open()}>
+              Upload File to Cloudinary
+            </button>
           </div>
-          
+
           {/* <Recorder
         onRecordingComplete={this._onRecordingComplete}
         onRecordingError={this._onRecordingError}
       /> */}
-      
 
-          
-            <button className='buttons' onClick = {this.cameraOn} >Turn on React Camera</button>
-            
-          {this.state.camera ? <Camera
-  onTakePhoto={dataUri => {
-    this.onTakePhoto(dataUri);
-  }} 
-/> : '' }
+          <button className="buttons" onClick={this.cameraOn}>
+            {this.state.camera ? ("Turn off React Camera") : ("Turn on React Camera")}
+          </button>
+
+          {this.state.camera ? (
+            <Camera
+              onTakePhoto={dataUri => {
+                this.onTakePhoto(dataUri);
+              }}
+            />
+          ) : (
+            ""
+          )}
         </main>
       </div>
     );
