@@ -15,7 +15,7 @@ class App extends Component {
       audio: null,
       selectedFile: null,
       camera: false,
-      gallery: {}
+      gallery: []
     };
   }
 
@@ -23,16 +23,27 @@ class App extends Component {
     axios.get("https://ironrest.herokuapp.com/shahriyar").then(data => {
       //set to state and loop through to show images
       console.log(data);
+
+      const addToGallery = () => {
+        data.map((each, i) => {
+          if (each.url) {
+            let newGallery = [...this.state.gallery];
+            newGallery = [...each];
+            this.setState({ gallery: newGallery });
+          }
+        });
+      };
     });
   }
+
   showGallery = () => {
-    return this.state.gallery.map((eachItem, i) => {
+    this.state.gallery.map((eachItem, i) => {
       if (eachItem.url) {
         return (
           <li key={i}>
             <h2>{eachItem._id}</h2>
             <img src={eachItem.url} width="100px" />
-            //<button onClick={() => this.delete(i)}>Delete</button>
+            <button onClick={() => this.delete(i)}>Delete</button>
           </li>
         );
       }
@@ -41,7 +52,7 @@ class App extends Component {
   delete = index => {
     let newGallery = [...this.state.gallery];
     newGallery.splice(index, 1);
-    this.setState({ gallery:newGallery });
+    this.setState({ gallery: newGallery });
   };
 
   onTakePhoto(dataUri) {
@@ -103,8 +114,11 @@ class App extends Component {
   showWidget = widget => {
     widget.open();
   };
-  cameraOn = () => { this.state.camera ? this.setState({camera:false}) : this.setState({camera:true}) }
- 
+  cameraOn = () => {
+    this.state.camera
+      ? this.setState({ camera: false })
+      : this.setState({ camera: true });
+  };
 
   render() {
     let widget = window.cloudinary.createUploadWidget(
@@ -141,6 +155,11 @@ class App extends Component {
               Upload File to Cloudinary
             </button>
           </div>
+          <div>
+            <button className="buttons" onClick={this.showGallery()}>
+              Show Gallery
+            </button>
+          </div>
 
           {/* <Recorder
         onRecordingComplete={this._onRecordingComplete}
@@ -148,7 +167,9 @@ class App extends Component {
       /> */}
 
           <button className="buttons" onClick={this.cameraOn}>
-            {this.state.camera ? ("Turn off React Camera") : ("Turn on React Camera")}
+            {this.state.camera
+              ? "Turn off React Camera"
+              : "Turn on React Camera"}
           </button>
 
           {this.state.camera ? (
@@ -157,9 +178,7 @@ class App extends Component {
                 this.onTakePhoto(dataUri);
               }}
             />
-          ) : (
-            null
-          )}
+          ) : null}
         </main>
       </div>
     );
