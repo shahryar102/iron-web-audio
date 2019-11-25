@@ -26,7 +26,7 @@ class App extends Component {
     axios.get("https://ironrest.herokuapp.com/shahriyar").then(data => {
       //set to state and loop through to show images
       console.log(data);
-      console.log(data.data[0].url);
+      // console.log(data.data[0].url);
       this.setState({ gallery: data.data });
     });
   }
@@ -93,7 +93,9 @@ class App extends Component {
     console.log("this is posting function");
     axios
       .post("https://ironrest.herokuapp.com/shahriyar", { url: x })
-      .then(data => {});
+      .then(data => {
+        console.log(data)
+      });
   };
   clearApi = () => {
     console.log("this is the clear function");
@@ -113,6 +115,7 @@ class App extends Component {
       console.log(resultEvent, resultEvent.info.url);
 
       this.postApi(resultEvent.info.url);
+      //get the link state
     }
   };
 
@@ -137,7 +140,7 @@ class App extends Component {
     );
     return (
       <div className="App">
-        <main>
+        <main className="app-main">
           <div className="controls">
             <button className="buttons" onClick={this.toggleMicrophone}>
               {this.state.audio
@@ -145,17 +148,12 @@ class App extends Component {
                 : "Turn on Graphic Microphone"}
             </button>
           </div>
-          {this.state.audio && (
-            <AudioAnalyser
-              audio={this.state.audio}
-              send={this.sendDataHandler}
-            />
-          )}
+          
           <div>
             <button className={this.state.buttonOn? "buttonOn" : "buttonOff" }onClick={this.shouldIshowGallery}>
               {this.state.showGallery? "Hide Gallery" : "Show Gallery"}
             </button>
-            {this.showGallery()}
+            
           </div>
           <button className="buttons" onClick={this.clearApi}>
             Clear iron-rest API
@@ -178,14 +176,24 @@ class App extends Component {
               : "Turn on React Camera"}
           </button>
 
-          {this.state.camera ? (
+          
+        </main>
+        <div className="content">
+        {this.state.camera ? (
             <Camera
               onTakePhoto={dataUri => {
                 this.onTakePhoto(dataUri);
               }}
             />
           ) : null}
-        </main>
+          {this.state.audio && (
+              <AudioAnalyser
+                audio={this.state.audio}
+                send={this.sendDataHandler}
+              />
+            )}
+            {this.showGallery()}
+        </div>
       </div>
     );
   }

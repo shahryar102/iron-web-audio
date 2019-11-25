@@ -1,4 +1,6 @@
 .App {
+  display: flex;
+
 }
 
 .App-logo {
@@ -22,4 +24,11 @@
 
 .gallery {
   text-align: center;
+}
+
+.app-main {
+  width: 40%;
+}
+.content {
+  width: 60%;
 }
