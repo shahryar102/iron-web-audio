@@ -103,9 +103,8 @@ class App extends Component {
   showWidget = widget => {
     widget.open();
   };
-  cameraOn = () => {
-    this.setState({ camera: true });
-  };
+  cameraOn = () => { this.state.camera ? this.setState({camera:false}) : this.setState({camera:true}) }
+ 
 
   render() {
     let widget = window.cloudinary.createUploadWidget(
@@ -159,7 +158,7 @@ class App extends Component {
               }}
             />
           ) : (
-            ""
+            null
           )}
         </main>
       </div>
