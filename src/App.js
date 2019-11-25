@@ -6,16 +6,19 @@ import { Switch, Link, Route } from "react-router-dom";
 import Camera from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 import Recorder from "react-mp3-recorder";
-//import './App.css';
+import './App.css';
 import "./buttons.css";
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showGallery: false,
       audio: null,
       selectedFile: null,
       camera: false,
-      gallery: []
+      gallery: [],
+      buttonOn: false,
     };
   }
 
@@ -28,25 +31,28 @@ class App extends Component {
     });
   }
 
-  // addToGallery = imageData.map((each, i) => {
-  //   let newGallery = [...this.state.gallery];
-  //   newGallery.push(each.url);
-  //   console.log("new gallery:" + newGallery);
-  //   this.setState({ gallery: newGallery });
-  // });
+  shouldIshowGallery = () => {
+    this.setState({ showGallery: !this.state.showGallery, buttonOn:!this.state.buttonOn });
+  };
 
   showGallery = () => {
-    console.log(this.state.gallery);
-    this.state.gallery.map((eachItem, i) => {
-      console.log(eachItem.url);
-      return (
-        <li key={i}>
-          <h2>Just pictured! {eachItem._id}</h2>
-          <img src={eachItem.url} width="100px" />
-          <button onClick={() => this.delete(i)}>Delete</button>
-        </li>
-      );
-    });
+    console.log("gallery");
+
+    if (this.state.showGallery) {
+      console.log(this.state.gallery);
+      return this.state.gallery.map((eachItem, i) => {
+        console.log(eachItem.url);
+        return (
+          <div className= "gallery" key={i} >
+            <h2>Captured from ironrest #{i+1}</h2>
+            <img src={eachItem.url} width="400px" height="400px" />
+            <button onClick={() => this.delete(i)}>Delete</button>
+          </div>
+        );
+      });
+    } else {
+      return <></>;
+    }
   };
   delete = index => {
     let newGallery = [...this.state.gallery];
@@ -133,7 +139,7 @@ class App extends Component {
       <div className="App">
         <main>
           <div className="controls">
-            <button onClick={this.toggleMicrophone}>
+            <button className="buttons" onClick={this.toggleMicrophone}>
               {this.state.audio
                 ? "Stop microphone"
                 : "Turn on Graphic Microphone"}
@@ -146,9 +152,10 @@ class App extends Component {
             />
           )}
           <div>
-            <button className="buttons" onClick={this.showGallery}>
-              Show Gallery
+            <button className={this.state.buttonOn? "buttonOn" : "buttonOff" }onClick={this.shouldIshowGallery}>
+              {this.state.showGallery? "Hide Gallery" : "Show Gallery"}
             </button>
+            {this.showGallery()}
           </div>
           <button className="buttons" onClick={this.clearApi}>
             Clear iron-rest API

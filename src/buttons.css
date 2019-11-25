@@ -1,7 +1,36 @@
-.buttons {
+.buttonOn {
+    position: relative;
     padding: 20px;
     border-radius: 100%;
-    background-color: #e4e277;
+    background-color: #f00606;
+    font-size: large;
+    font-weight: bold;
+    -webkit-box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4);
+-moz-box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4);
+box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4);
+margin-top: 80px;
+align-items: flex-start;
+}
+
+.buttonOff {
+    position: relative;
+    padding: 20px;
+    border-radius: 100%;
+    background-color: #00ff0d;
+    font-size: large;
+    font-weight: bold;
+    -webkit-box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4);
+-moz-box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4);
+box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4);
+margin-top: 80px;
+align-items: flex-start;
+}
+
+.buttons {
+    position: relative;
+    padding: 20px;
+    border-radius: 100%;
+    background-color: #00ff0d;
     font-size: large;
     font-weight: bold;
     -webkit-box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4);
