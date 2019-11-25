@@ -23,30 +23,29 @@ class App extends Component {
     axios.get("https://ironrest.herokuapp.com/shahriyar").then(data => {
       //set to state and loop through to show images
       console.log(data);
-
-      const addToGallery = () => {
-        data.map((each, i) => {
-          if (each.url) {
-            let newGallery = [...this.state.gallery];
-            newGallery = [...each];
-            this.setState({ gallery: newGallery });
-          }
-        });
-      };
+      console.log(data.data[0].url);
+      this.setState({ gallery: data.data });
     });
   }
 
+  // addToGallery = imageData.map((each, i) => {
+  //   let newGallery = [...this.state.gallery];
+  //   newGallery.push(each.url);
+  //   console.log("new gallery:" + newGallery);
+  //   this.setState({ gallery: newGallery });
+  // });
+
   showGallery = () => {
+    console.log(this.state.gallery);
     this.state.gallery.map((eachItem, i) => {
-      if (eachItem.url) {
-        return (
-          <li key={i}>
-            <h2>{eachItem._id}</h2>
-            <img src={eachItem.url} width="100px" />
-            <button onClick={() => this.delete(i)}>Delete</button>
-          </li>
-        );
-      }
+      console.log(eachItem.url);
+      return (
+        <li key={i}>
+          <h2>Just pictured! {eachItem._id}</h2>
+          <img src={eachItem.url} width="100px" />
+          <button onClick={() => this.delete(i)}>Delete</button>
+        </li>
+      );
     });
   };
   delete = index => {
@@ -146,6 +145,11 @@ class App extends Component {
               send={this.sendDataHandler}
             />
           )}
+          <div>
+            <button className="buttons" onClick={this.showGallery}>
+              Show Gallery
+            </button>
+          </div>
           <button className="buttons" onClick={this.clearApi}>
             Clear iron-rest API
           </button>
@@ -153,11 +157,6 @@ class App extends Component {
           <div id="photo-from-container">
             <button className="buttons" onClick={() => widget.open()}>
               Upload File to Cloudinary
-            </button>
-          </div>
-          <div>
-            <button className="buttons" onClick={this.showGallery()}>
-              Show Gallery
             </button>
           </div>
 
