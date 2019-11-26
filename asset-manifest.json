@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/iron-web-audio/static/css/main.5d0dea37.chunk.css",
+    "main.js": "/iron-web-audio/static/js/main.44f46b32.chunk.js",
+    "main.js.map": "/iron-web-audio/static/js/main.44f46b32.chunk.js.map",
+    "runtime-main.js": "/iron-web-audio/static/js/runtime-main.f66f4540.js",
+    "runtime-main.js.map": "/iron-web-audio/static/js/runtime-main.f66f4540.js.map",
+    "static/css/2.f0405d8a.chunk.css": "/iron-web-audio/static/css/2.f0405d8a.chunk.css",
+    "static/js/2.d9a7f929.chunk.js": "/iron-web-audio/static/js/2.d9a7f929.chunk.js",
+    "static/js/2.d9a7f929.chunk.js.map": "/iron-web-audio/static/js/2.d9a7f929.chunk.js.map",
+    "index.html": "/iron-web-audio/index.html",
+    "precache-manifest.7e2c6d62fff1728d3e3dab6b73e5bb53.js": "/iron-web-audio/precache-manifest.7e2c6d62fff1728d3e3dab6b73e5bb53.js",
+    "service-worker.js": "/iron-web-audio/service-worker.js",
+    "static/css/2.f0405d8a.chunk.css.map": "/iron-web-audio/static/css/2.f0405d8a.chunk.css.map",
+    "static/css/main.5d0dea37.chunk.css.map": "/iron-web-audio/static/css/main.5d0dea37.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f66f4540.js",
+    "static/css/2.f0405d8a.chunk.css",
+    "static/js/2.d9a7f929.chunk.js",
+    "static/css/main.5d0dea37.chunk.css",
+    "static/js/main.44f46b32.chunk.js"
+  ]
+}
