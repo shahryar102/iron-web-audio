@@ -118,9 +118,11 @@ class App extends Component {
       console.log(resultEvent, resultEvent.info.url);
       this.postApi(resultEvent.info.url);
       let newGallery = [...this.state.gallery];
-    newGallery.push({_id:resultEvent.info.public_id,url:resultEvent.info.url})
-    this.setState({ gallery: newGallery });
-      
+      newGallery.push({
+        _id: resultEvent.info.public_id,
+        url: resultEvent.info.url
+      });
+      this.setState({ gallery: newGallery });
     }
   };
 
@@ -182,6 +184,10 @@ class App extends Component {
               ? "Turn off React Camera"
               : "Turn on React Camera"}
           </button>
+
+          <a href="https://shahryar102.github.io/Audio-recorder/index.html">
+            <button className="buttons">Record Audio</button>
+          </a>
         </main>
         <div className="content">
           {this.state.camera ? (
