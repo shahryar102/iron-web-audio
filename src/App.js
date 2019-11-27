@@ -184,6 +184,7 @@ class App extends Component {
               ? "Turn off React Camera"
               : "Turn on React Camera"}
           </button>
+          <button>hi</button>
 
           <a href="https://shahryar102.github.io/Audio-recorder/index.html">
             <button className="buttons">Record Audio</button>
