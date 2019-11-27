@@ -8,7 +8,7 @@ import "react-html5-camera-photo/build/css/index.css";
 import Recorder from "react-mp3-recorder";
 import "./App.css";
 import "./buttons.css";
-
+console.log('hello?')
 class App extends Component {
   constructor(props) {
     super(props);
