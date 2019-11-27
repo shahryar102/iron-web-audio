@@ -8,7 +8,7 @@ import "react-html5-camera-photo/build/css/index.css";
 import Recorder from "react-mp3-recorder";
 import "./App.css";
 import "./buttons.css";
-console.log('hello?')
+console.log("hello?");
 class App extends Component {
   constructor(props) {
     super(props);
@@ -166,7 +166,10 @@ class App extends Component {
           </div>
           <button className="buttons" onClick={this.clearApi}>
             Clear iron-rest API
-          </button>
+          </button> <span>.      .</span>
+          <a href="https://ironrest.herokuapp.com/shahriyar">
+            <button className="buttons">Link to iron-rest API</button>
+          </a>
 
           <div id="photo-from-container">
             <button className="buttons" onClick={() => widget.open()}>
@@ -184,6 +187,7 @@ class App extends Component {
               ? "Turn off React Camera"
               : "Turn on React Camera"}
           </button>
+          <span>.      .</span>
 
           <a href="https://shahryar102.github.io/Audio-recorder/index.html">
             <button className="buttons">Record Audio</button>
